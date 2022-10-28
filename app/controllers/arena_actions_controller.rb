@@ -28,8 +28,8 @@ class ArenaActionsController < ApplicationController
               "type": "plain_text",
               "text": "Participar"
             },
-            "value": "click_me_123",
-            "action_id": "button"
+            "value": "join", # Não está sendo usado
+            "action_id": "join_button"
           }
         }
       ]
@@ -39,6 +39,16 @@ class ArenaActionsController < ApplicationController
   # POST /join
   # join_path
   def join
-    render json: { "text": "Você entrou na arena!" }
+    action = params[:payload][:action]&.first[:action_id]
+    if action == "join_button"
+      player = Player.create_or_find_by!(slack_id: params[:payload][:user][:id])
+      player.update!(health_points: 100)
+
+      render json: {
+        "response_type": "in_channel", # Mensagem visível para todos
+        text: "<@#{player.slack_id}> entrou na partida!"
+      }
+    end
+    head :unprocessable_entity
   end
 end
