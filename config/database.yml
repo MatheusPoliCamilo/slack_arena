@@ -82,6 +82,6 @@ test:
 production:
   <<: *default
   url: <%= ENV["DATABASE_URL"] %>
-  database: slack_arena_production
-  username: slack_arena
+  database: slack_arena_database
+  username: slack_arena_database_user
   password: <%= ENV["SLACK_ARENA_DATABASE_PASSWORD"] %>
