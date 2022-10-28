@@ -39,9 +39,10 @@ class ArenaActionsController < ApplicationController
   # POST /join
   # join_path
   def join
-    action = JSON.parse(teste["payload"])["actions"].first["action_id"]
+    payload = JSON.parse(params["payload"]) 
+    action = payload["actions"].first["action_id"]
     if action == "join_button"
-      player = Player.create_or_find_by!(slack_id: params[:payload][:user][:id])
+      player = Player.create_or_find_by!(slack_id: payload["user"]["id"])
       player.update!(health_points: 100)
 
       render json: {
