@@ -10,7 +10,8 @@ class ArenaActionsController < ApplicationController
   # POST /arena
   # arena_actions_path
   def arena
-    render json: { 
+    render json: {
+      "response_type": "in_channel", # Mensagem visível para todos
       "blocks": [
         {
           "type": "section",
