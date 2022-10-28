@@ -1,6 +1,4 @@
 class ArenaActionsController < ApplicationController
-  require 'net/http'
-  require 'uri'
   protect_from_forgery with: :null_session
 
   def index
@@ -45,7 +43,7 @@ class ArenaActionsController < ApplicationController
       player = Player.create_or_find_by!(slack_id: payload["user"]["id"])
       player.update!(health_points: 100)
 
-      render json: {
+      return render json: {
         "response_type": "in_channel", # Mensagem visível para todos
         text: "<@#{player.slack_id}> entrou na partida!"
       }
