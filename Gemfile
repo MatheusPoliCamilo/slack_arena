@@ -18,6 +18,12 @@ gem "puma", "~> 5.0"
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem "tzinfo-data", platforms: %i[ mingw mswin x64_mingw jruby ]
 
+# https://github.com/slack-ruby/slack-ruby-client
+gem "slack-ruby-client"
+
+# https://github.com/socketry/async-websocket
+# gem "async-websocket"
+
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
