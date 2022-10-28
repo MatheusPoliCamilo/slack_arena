@@ -3,4 +3,5 @@ Rails.application.routes.draw do
 
   # Defines the root path route ("/")
   root "arena_actions#index"
+  post "arena" => "arena_actions#arena"
 end
