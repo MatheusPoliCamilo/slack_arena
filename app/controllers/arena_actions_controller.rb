@@ -8,8 +8,11 @@ class ArenaActionsController < ApplicationController
   end
 
   # POST /arena
-  # arena_actions_path
+  # arena_path
   def arena
+    player = Player.create_or_find_by!(slack_id: params[:user_id])
+    player.update!(health_points: 100)
+
     render json: {
       "response_type": "in_channel", # Mensagem visível para todos
       "blocks": [
@@ -17,7 +20,7 @@ class ArenaActionsController < ApplicationController
           "type": "section",
           "text": {
             "type": "mrkdwn",
-            "text": "Uma partida de Slack Arena está começando."
+            "text": "<@#{player.slack_id}> está inciando uma partida de Slack Arena."
           },
           "accessory": {
             "type": "button",
@@ -31,5 +34,11 @@ class ArenaActionsController < ApplicationController
         }
       ]
     }
+  end
+
+  # POST /join
+  # join_path
+  def join
+    render json: { "text": "Você entrou na arena!" }
   end
 end
